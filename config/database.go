@@ -48,5 +48,5 @@ func (d *Database) Name() string {
 	if env := os.Getenv("DATABASE_NAME"); env != "" {
 		return env
 	}
-	return "user"
+	return "dropit"
 }

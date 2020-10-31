@@ -2,7 +2,7 @@ package infra
 
 import (
 	"errors"
-	"github/four-servings/dropit-backend/user/config"
+	"github/four-servings/dropit-backend/config"
 	"github/four-servings/dropit-backend/user/domain"
 	"log"
 	"os"
