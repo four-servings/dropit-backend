@@ -2,8 +2,8 @@ package infra
 
 import (
 	"errors"
-	"github/four-servings/dropit-backend/config"
-	"github/four-servings/dropit-backend/domain"
+	"github/four-servings/dropit-backend/user/config"
+	"github/four-servings/dropit-backend/user/domain"
 	"log"
 	"os"
 	"time"
@@ -32,7 +32,7 @@ type (
 // NewRepository create repository instance
 func NewRepository() UserRepository {
 	db := getDatabaseConnection()
-	db.AutoMigrate(&UserEntity{})
+	db.AutoMigrate(&Entity{})
 	return &userRepositoryImplements{db: db}
 }
 
@@ -43,7 +43,7 @@ func (r *userRepositoryImplements) FindNewID() string {
 		panic(err)
 	}
 
-	result := r.db.Where(&UserEntity{ID: id.String()}).First(&UserEntity{})
+	result := r.db.Where(&Entity{ID: id.String()}).First(&Entity{})
 
 	if result.Error != nil && result.Error.Error() != "record not found" {
 		panic(result.Error)
