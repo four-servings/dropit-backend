@@ -23,7 +23,7 @@ type (
 
 // NewRepository create repository instance
 func NewRepository(db *gorm.DB) UserRepository {
-	db.AutoMigrate(&Entity{})
+	db.AutoMigrate(&User{})
 	return &userRepositoryImplement{db}
 }
 
@@ -34,7 +34,7 @@ func (r *userRepositoryImplement) FindNewID() string {
 		panic(err)
 	}
 
-	result := r.db.Where(&Entity{ID: id.String()}).First(&Entity{})
+	result := r.db.Where(&User{ID: id.String()}).First(&User{})
 
 	if result.Error != nil && result.Error.Error() != "record not found" {
 		panic(result.Error)

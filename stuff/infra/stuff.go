@@ -2,8 +2,8 @@ package infra
 
 import "time"
 
-// Entity stuff entity
-type Entity struct {
+// Stuff stuff entity
+type Stuff struct {
 	ID        string    `gorm:"primary_key"`
 	Name      string    `gorm:"not null"`
 	Category  string    `gorm:"not null"`
