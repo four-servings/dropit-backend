@@ -23,7 +23,6 @@ type (
 		Save(user domain.User)
 	}
 
-	// userRepositoryImplement user repository implements
 	userRepositoryImplement struct {
 		db *gorm.DB
 	}
