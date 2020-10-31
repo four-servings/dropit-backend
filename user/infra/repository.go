@@ -23,8 +23,8 @@ type (
 		Save(user domain.User)
 	}
 
-	// userRepositoryImplements user repository implements
-	userRepositoryImplements struct {
+	// userRepositoryImplement user repository implements
+	userRepositoryImplement struct {
 		db *gorm.DB
 	}
 )
@@ -33,11 +33,11 @@ type (
 func NewRepository() UserRepository {
 	db := getDatabaseConnection()
 	db.AutoMigrate(&Entity{})
-	return &userRepositoryImplements{db: db}
+	return &userRepositoryImplement{db: db}
 }
 
 // FindNewID find new entity id
-func (r *userRepositoryImplements) FindNewID() string {
+func (r *userRepositoryImplement) FindNewID() string {
 	id, err := uuid.NewUUID()
 	if err != nil {
 		panic(err)
@@ -57,7 +57,7 @@ func (r *userRepositoryImplements) FindNewID() string {
 }
 
 // Save insert or update user data
-func (r *userRepositoryImplements) Save(user domain.User) {
+func (r *userRepositoryImplement) Save(user domain.User) {
 	entity := ModelToEntity(user)
 	if err := r.db.Save(entity).Error; err != nil {
 		panic(nil)
