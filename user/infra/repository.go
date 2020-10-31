@@ -2,14 +2,7 @@ package infra
 
 import (
 	"errors"
-	"github/four-servings/dropit-backend/config"
 	"github/four-servings/dropit-backend/user/domain"
-	"log"
-	"os"
-	"time"
-
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm/logger"
 
 	"github.com/google/uuid"
 
@@ -29,8 +22,7 @@ type (
 )
 
 // NewRepository create repository instance
-func NewRepository() UserRepository {
-	db := getDatabaseConnection()
+func NewRepository(db *gorm.DB) UserRepository {
 	db.AutoMigrate(&Entity{})
 	return &userRepositoryImplement{db: db}
 }
@@ -61,34 +53,4 @@ func (r *userRepositoryImplement) Save(user domain.User) {
 	if err := r.db.Save(entity).Error; err != nil {
 		panic(nil)
 	}
-}
-
-func getDatabaseConnection() *gorm.DB {
-	dbConfig := config.Database{}
-
-	user := dbConfig.User()
-	password := dbConfig.Password()
-	host := dbConfig.Host()
-	port := dbConfig.Port()
-	name := dbConfig.Name()
-
-	dsn := user + ":" + password + "@tcp(" + host + ":" + port + ")/" + name + "?parseTime=true"
-
-	connection, err := gorm.Open(
-		mysql.Open(dsn),
-		&gorm.Config{
-			Logger: logger.New(
-				log.New(os.Stdout, "\r\n", log.LstdFlags),
-				logger.Config{
-					SlowThreshold: time.Second,
-					LogLevel:      logger.Silent,
-				},
-			),
-		},
-	)
-	if err != nil {
-		panic(err)
-	}
-
-	return connection
 }
