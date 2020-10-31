@@ -1,8 +1,8 @@
 package command
 
 import (
-	"github/four-servings/dropit-backend/domain"
-	"github/four-servings/dropit-backend/infra"
+	"github/four-servings/dropit-backend/user/domain"
+	"github/four-servings/dropit-backend/user/infra"
 )
 
 type (

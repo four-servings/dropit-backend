@@ -2,7 +2,7 @@ package api
 
 import (
 	"encoding/json"
-	"github/four-servings/dropit-backend/app/command"
+	"github/four-servings/dropit-backend/user/app/command"
 	"net/http"
 )
 

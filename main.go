@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github/four-servings/dropit-backend/api"
-	"github/four-servings/dropit-backend/app"
-	"github/four-servings/dropit-backend/infra"
+	"github/four-servings/dropit-backend/user/api"
+	"github/four-servings/dropit-backend/user/app"
+	"github/four-servings/dropit-backend/user/infra"
 	"net/http"
 )
 

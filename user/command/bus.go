@@ -2,7 +2,7 @@ package command
 
 import (
 	"errors"
-	"github/four-servings/dropit-backend/infra"
+	"github/four-servings/dropit-backend/user/infra"
 )
 
 type (
