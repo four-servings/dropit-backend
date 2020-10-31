@@ -24,7 +24,7 @@ type (
 // NewRepository create repository instance
 func NewRepository(db *gorm.DB) UserRepository {
 	db.AutoMigrate(&Entity{})
-	return &userRepositoryImplement{db: db}
+	return &userRepositoryImplement{db}
 }
 
 // FindNewID find new entity id
