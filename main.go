@@ -2,14 +2,14 @@ package main
 
 import (
 	"github/four-servings/dropit-backend/user/api"
-	"github/four-servings/dropit-backend/user/app"
+	"github/four-servings/dropit-backend/user/app/command"
 	"github/four-servings/dropit-backend/user/infra"
 	"net/http"
 )
 
 func main() {
 	repository := infra.NewRepository()
-	commandBus := app.NewCommandBus(repository)
+	commandBus := command.NewBus(repository)
 	controller := api.NewController(commandBus)
 
 	http.HandleFunc("/users", controller.Handle)
