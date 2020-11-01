@@ -41,6 +41,7 @@ func (c *controllerImplement) branchByMethod(w http.ResponseWriter, r *http.Requ
 type createStuffBody struct {
 	Name     string `json:"name"`
 	Category string `json:"category"`
+	Folder   string `json:"folder"`
 }
 
 func (c *controllerImplement) handlePOST(w http.ResponseWriter, r *http.Request) {
@@ -53,7 +54,12 @@ func (c *controllerImplement) handlePOST(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	c.commandBus.Handle(&command.CreateStuff{body.Name, body.Category})
+	name := body.Name
+	category := body.Category
+	folder := body.Folder
+
+	command := &command.CreateStuff{name, category, folder}
+	c.commandBus.Handle(command)
 	w.WriteHeader(http.StatusCreated)
 }
 

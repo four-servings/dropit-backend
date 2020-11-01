@@ -10,6 +10,7 @@ type (
 	CreateStuff struct {
 		Name     string
 		Category string
+		Folder   string
 	}
 
 	createStuffHandler interface {
