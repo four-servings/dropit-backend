@@ -11,6 +11,7 @@ type (
 		name      string
 		category  string
 		folder    string
+		userID    string
 		createdAt time.Time
 		updatedAt time.Time
 	}
@@ -21,6 +22,7 @@ type (
 		Name      string
 		Category  string
 		Folder    string
+		UserID    string
 		CreatedAt time.Time
 		UpdatedAt time.Time
 	}
@@ -46,6 +48,11 @@ func (stuff *Stuff) Folder() string {
 	return stuff.folder
 }
 
+// UserID get stuff userID
+func (stuff *Stuff) UserID() string {
+	return stuff.userID
+}
+
 // CreatedAt get stuff createdAt
 func (stuff *Stuff) CreatedAt() time.Time {
 	return stuff.createdAt
@@ -57,8 +64,8 @@ func (stuff *Stuff) UpdatedAt() time.Time {
 }
 
 // NewStuff create new Stuff
-func NewStuff(id, name, category, folder string) Stuff {
-	return Stuff{id, name, category, folder, time.Now(), time.Now()}
+func NewStuff(id, name, category, folder, userID string) Stuff {
+	return Stuff{id, name, category, folder, userID, time.Now(), time.Now()}
 }
 
 // ToRichModel create rich stuff model from anemic model
@@ -67,7 +74,8 @@ func (a *AnemicStuff) ToRichModel() Stuff {
 	name := a.Name
 	category := a.Category
 	folder := a.Folder
+	userID := a.UserID
 	createdAt := a.CreatedAt
 	updatedAt := a.UpdatedAt
-	return Stuff{id, name, category, folder, createdAt, updatedAt}
+	return Stuff{id, name, category, folder, userID, createdAt, updatedAt}
 }

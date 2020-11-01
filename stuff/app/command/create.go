@@ -11,6 +11,7 @@ type (
 		Name     string
 		Category string
 		Folder   string
+		UserID   string
 	}
 
 	createStuffHandler interface {
@@ -28,6 +29,10 @@ func newCreateStuffHandler(repository infra.StuffRepository) createStuffHandler 
 
 func (h *createStuffHandlerImplement) handle(command *CreateStuff) {
 	id := h.repository.FindNewID()
-	stuff := domain.NewStuff(id, command.Name, command.Category)
+	name := command.Name
+	category := command.Category
+	folder := command.Folder
+	userID := command.UserID
+	stuff := domain.NewStuff(id, name, category, folder, userID)
 	h.repository.Save(stuff)
 }

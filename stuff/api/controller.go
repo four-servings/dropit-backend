@@ -42,6 +42,7 @@ type createStuffBody struct {
 	Name     string `json:"name"`
 	Category string `json:"category"`
 	Folder   string `json:"folder"`
+	UserID   string `json:"user_id"`
 }
 
 func (c *controllerImplement) handlePOST(w http.ResponseWriter, r *http.Request) {
