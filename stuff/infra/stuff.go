@@ -9,6 +9,7 @@ type Stuff struct {
 	Category  string    `gorm:"not null"`
 	Folder    string    `gorm:"not null"`
 	UserID    string    `gorm:"not null"`
+	FileKey   string    `gorm:"not null"`
 	CreatedAt time.Time `gorm:"not null"`
 	UpdatedAt time.Time `gorm:"not null"`
 }

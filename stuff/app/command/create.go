@@ -3,6 +3,7 @@ package command
 import (
 	"github/four-servings/dropit-backend/stuff/domain"
 	"github/four-servings/dropit-backend/stuff/infra"
+	"mime/multipart"
 )
 
 type (
@@ -12,6 +13,7 @@ type (
 		Category string
 		Folder   string
 		UserID   string
+		Image    *multipart.FileHeader
 	}
 
 	createStuffHandler interface {
@@ -20,11 +22,12 @@ type (
 
 	createStuffHandlerImplement struct {
 		repository infra.StuffRepository
+		s3Adaptor  infra.S3Adaptor
 	}
 )
 
-func newCreateStuffHandler(repository infra.StuffRepository) createStuffHandler {
-	return &createStuffHandlerImplement{repository}
+func newCreateStuffHandler(repository infra.StuffRepository, s3Adaptor infra.S3Adaptor) createStuffHandler {
+	return &createStuffHandlerImplement{repository, s3Adaptor}
 }
 
 func (h *createStuffHandlerImplement) handle(command *CreateStuff) {
@@ -33,6 +36,7 @@ func (h *createStuffHandlerImplement) handle(command *CreateStuff) {
 	category := command.Category
 	folder := command.Folder
 	userID := command.UserID
-	stuff := domain.NewStuff(id, name, category, folder, userID)
+	fileKey := h.s3Adaptor.Upload(command.Image)
+	stuff := domain.NewStuff(id, name, category, folder, userID, fileKey)
 	h.repository.Save(stuff)
 }

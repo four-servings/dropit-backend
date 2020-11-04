@@ -46,20 +46,37 @@ type createStuffBody struct {
 }
 
 func (c *controllerImplement) handlePOST(w http.ResponseWriter, r *http.Request) {
-	decoder := json.NewDecoder(r.Body)
-	decoder.DisallowUnknownFields()
 
-	body := createStuffBody{}
-	if decoder.Decode(&body) != nil {
-		http.Error(w, "can not parse body", http.StatusBadRequest)
+	_, fileHeader, err := r.FormFile("image")
+	if err != nil {
+		http.Error(w, "can not found image", http.StatusBadRequest)
 		return
 	}
 
-	name := body.Name
-	category := body.Category
-	folder := body.Folder
+	category := r.FormValue("category")
+	if category == "" {
+		http.Error(w, "category is empty", http.StatusBadRequest)
+		return
+	}
 
-	command := &command.CreateStuff{name, category, folder}
+	name := r.FormValue("name")
+	if name == "" {
+		http.Error(w, "name is empty", http.StatusBadRequest)
+		return
+	}
+
+	folder := r.FormValue("folder")
+	if folder == "" {
+		http.Error(w, "folder is empty", http.StatusBadRequest)
+		return
+	}
+
+	decoder := json.NewDecoder(r.Body)
+	decoder.DisallowUnknownFields()
+
+	userID := "userID"
+
+	command := &command.CreateStuff{name, category, folder, userID, fileHeader}
 	c.commandBus.Handle(command)
 	w.WriteHeader(http.StatusCreated)
 }

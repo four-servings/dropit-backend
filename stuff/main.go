@@ -11,7 +11,8 @@ import (
 func init() {
 	dbConnection := setup.GetDatabaseConnection()
 	repository := infra.NewRepository(dbConnection)
-	commandBus := command.NewBus(repository)
+	s3Adaptor := infra.NewS3Adaptor()
+	commandBus := command.NewBus(repository, s3Adaptor)
 	controller := api.NewController(commandBus)
 
 	http.HandleFunc("/stuffs", controller.Handle)

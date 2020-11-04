@@ -17,8 +17,8 @@ type (
 )
 
 // NewBus create bus instance
-func NewBus(repository infra.StuffRepository) Bus {
-	createStuffHandler := newCreateStuffHandler(repository)
+func NewBus(repository infra.StuffRepository, s3Adaptor infra.S3Adaptor) Bus {
+	createStuffHandler := newCreateStuffHandler(repository, s3Adaptor)
 	return &busImplement{createStuffHandler}
 }
 

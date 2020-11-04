@@ -9,9 +9,10 @@ func ModelToEntity(model domain.Stuff) Stuff {
 	category := model.Category()
 	folder := model.Folder()
 	userID := model.UserID()
+	fileKey := model.FileKey()
 	createdAt := model.CreatedAt()
 	updatedAt := model.UpdatedAt()
-	return Stuff{id, name, category, folder, userID, createdAt, updatedAt}
+	return Stuff{id, name, category, folder, userID, fileKey, createdAt, updatedAt}
 }
 
 // EntityToModel convert stuff entity to model
@@ -21,8 +22,9 @@ func EntityToModel(entity Stuff) domain.Stuff {
 	category := entity.Category
 	folder := entity.Folder
 	userID := entity.UserID
+	fileKey := entity.FileKey
 	createdAt := entity.CreatedAt
 	updatedAt := entity.UpdatedAt
-	anemic := domain.AnemicStuff{id, name, category, folder, userID, createdAt, updatedAt}
+	anemic := domain.AnemicStuff{id, name, category, folder, userID, fileKey, createdAt, updatedAt}
 	return anemic.ToRichModel()
 }
