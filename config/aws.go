@@ -5,13 +5,10 @@ import (
 )
 
 // S3 aws s3 config
-type S3 struct {
-	region string
-	bucket string
-}
+type S3 struct{}
 
 // AccessKeyID aws s3 access key id
-func (s *S3) AccessKeyID() string {
+func (s S3) AccessKeyID() string {
 	if env := os.Getenv("AWS_S3_ACCESS_KEY_ID"); env != "" {
 		return env
 	}
@@ -19,7 +16,7 @@ func (s *S3) AccessKeyID() string {
 }
 
 // SecretAccessKey aws s3 secret access key
-func (s *S3) SecretAccessKey() string {
+func (s S3) SecretAccessKey() string {
 	if env := os.Getenv("AWS_S3_SECRET_ACCESS_KEY"); env != "" {
 		return env
 	}
@@ -27,7 +24,7 @@ func (s *S3) SecretAccessKey() string {
 }
 
 // Endpoint aws s3 endpoint
-func (s *S3) Endpoint() string {
+func (s S3) Endpoint() string {
 	if env := os.Getenv("AWS_S3_ENDPOINT"); env != "" {
 		return env
 	}
@@ -35,7 +32,7 @@ func (s *S3) Endpoint() string {
 }
 
 // Region aws s3 region
-func (s *S3) Region() string {
+func (s S3) Region() string {
 	if env := os.Getenv("AWS_S3_REGION"); env != "" {
 		return env
 	}
@@ -43,7 +40,7 @@ func (s *S3) Region() string {
 }
 
 // Bucket s3 bucket
-func (s *S3) Bucket() string {
+func (s S3) Bucket() string {
 	if env := os.Getenv("AWS_S3_BUCKET"); env != "" {
 		return env
 	}

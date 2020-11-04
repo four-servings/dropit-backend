@@ -3,16 +3,10 @@ package config
 import "os"
 
 // Database database config
-type Database struct {
-	user     string
-	password string
-	host     string
-	port     string
-	name     string
-}
+type Database struct{}
 
 // User database config
-func (d *Database) User() string {
+func (d Database) User() string {
 	if env := os.Getenv("DATABASE_USER"); env != "" {
 		return env
 	}
@@ -20,7 +14,7 @@ func (d *Database) User() string {
 }
 
 // Password database config
-func (d *Database) Password() string {
+func (d Database) Password() string {
 	if env := os.Getenv("DATABASE_PASSWORD"); env != "" {
 		return env
 	}
@@ -28,7 +22,7 @@ func (d *Database) Password() string {
 }
 
 // Host database config
-func (d *Database) Host() string {
+func (d Database) Host() string {
 	if env := os.Getenv("DATABASE_HOST"); env != "" {
 		return env
 	}
@@ -36,7 +30,7 @@ func (d *Database) Host() string {
 }
 
 // Port database config
-func (d *Database) Port() string {
+func (d Database) Port() string {
 	if env := os.Getenv("DATABASE_POST"); env != "" {
 		return env
 	}
@@ -44,7 +38,7 @@ func (d *Database) Port() string {
 }
 
 // Name database config
-func (d *Database) Name() string {
+func (d Database) Name() string {
 	if env := os.Getenv("DATABASE_NAME"); env != "" {
 		return env
 	}
