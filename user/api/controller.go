@@ -17,7 +17,6 @@ type (
 		Handle(w http.ResponseWriter, r *http.Request)
 	}
 
-	// controllerImplement http controller implement
 	controllerImplement struct {
 		commandBus command.Bus
 	}

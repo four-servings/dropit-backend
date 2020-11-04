@@ -11,12 +11,10 @@ type (
 		DeviceID string
 	}
 
-	// createUserHandler handler interface for CreateUser command
 	createUserHandler interface {
 		handle(command *CreateUser)
 	}
 
-	// createUserHandlerImplement handler implement for CreateUser command
 	createUserHandlerImplement struct {
 		repository infra.UserRepository
 	}
