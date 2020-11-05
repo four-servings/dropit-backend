@@ -1,7 +1,6 @@
 package infra
 
 import (
-	"errors"
 	"github/four-servings/dropit-backend/user/domain"
 
 	"github.com/google/uuid"
@@ -41,7 +40,7 @@ func (r *userRepositoryImplement) FindNewID() string {
 	}
 
 	if result.RowsAffected != 0 {
-		panic(errors.New("found id is duplicated"))
+		return r.FindNewID()
 	}
 
 	return id.String()
