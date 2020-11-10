@@ -11,8 +11,9 @@ func TestNewStuff(t *testing.T) {
 	category := "category"
 	folder := "folder"
 	userID := "userID"
+	fileKey := "image file Key"
 
-	stuff := NewStuff(id, name, category, folder, userID)
+	stuff := NewStuff(id, name, category, folder, userID, fileKey)
 
 	if stuff.id != id {
 		t.Fail()
@@ -37,12 +38,13 @@ func TestToRichModel(t *testing.T) {
 	category := "category"
 	folder := "folder"
 	userID := "userID"
+	fileKey := "image file Key"
 	createdAt := time.Now()
 	updatedAt := time.Now()
 
-	stuff := Stuff{id, name, category, folder, userID, createdAt, updatedAt}
+	stuff := Stuff{id, name, category, folder, userID, fileKey, createdAt, updatedAt}
 
-	anemic := AnemicStuff{id, name, category, folder, userID, createdAt, updatedAt}
+	anemic := AnemicStuff{id, name, category, folder, userID, fileKey, createdAt, updatedAt}
 	result := anemic.ToRichModel()
 
 	if result != stuff {

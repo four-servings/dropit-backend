@@ -11,12 +11,13 @@ func TestModelToEntity(t *testing.T) {
 	category := "category"
 	folder := "folder"
 	userID := "userID"
-	model := domain.NewStuff(id, name, category, folder, userID)
+	fileKey := "image file Key"
+	model := domain.NewStuff(id, name, category, folder, userID, fileKey)
 
 	createdAt := model.CreatedAt()
 	updatedAt := model.UpdatedAt()
 
-	entity := Stuff{id, name, category, folder, userID, createdAt, updatedAt}
+	entity := Stuff{id, name, category, folder, userID, fileKey, createdAt, updatedAt}
 
 	result := ModelToEntity(model)
 
@@ -31,12 +32,13 @@ func TestEntityToModel(t *testing.T) {
 	category := "category"
 	folder := "folder"
 	userID := "userID"
-	model := domain.NewStuff(id, name, category, folder, userID)
+	fileKey := "image file Key"
+	model := domain.NewStuff(id, name, category, folder, userID, fileKey)
 
 	createdAt := model.CreatedAt()
 	updatedAt := model.UpdatedAt()
 
-	entity := Stuff{id, name, category, folder, userID, createdAt, updatedAt}
+	entity := Stuff{id, name, category, folder, userID, fileKey, createdAt, updatedAt}
 
 	result := EntityToModel(entity)
 
